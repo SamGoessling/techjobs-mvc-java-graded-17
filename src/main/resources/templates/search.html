@@ -8,12 +8,12 @@
 
 <div class="container body-content">
 
-  <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-  <form th:action="@{/search/results}" method = "post">
-    <h2>Search by:</h2>
+    <form th:action="@{/search/results}" method = "post">
+        <h2>Search by:</h2>
 
-    <p>
+        <p>
             <span th:each="column : ${columns}">
                 <input
                         type="radio"
@@ -24,19 +24,48 @@
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
-    </p>
+        </p>
 
-    <p>
-      <label for="searchTerm">Keyword:</label>
-      <input type="text" name="searchTerm" id="searchTerm" />
-    </p>
+        <p>
+            <label for="searchTerm">Keyword:</label>
+            <input type="text" name="searchTerm" id="searchTerm" />
+        </p>
 
-    <input type="submit" value="Search" />
-  </form>
+        <input type="submit" value="Search" />
+    </form>
 
-  <hr />
+    <hr />
 
-  <!-- TODO #4 - Loop over the search results to display all job fields. -->
+    <!-- TODO #4 - Loop over the search results to display all job fields. -->
+
+    <table class="job-listing" th:each="job : ${jobs}">
+        <tbody>
+        <tr>
+            <td>ID</td>
+            <td th:text="${job.id}"></td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td th:text="${job.name}"></td>
+        </tr>
+        <tr>
+            <td>Employer</td>
+            <td th:text="${job.employer}"></td>
+        </tr>
+        <tr>
+            <td>Location</td>
+            <td th:text="${job.location}"></td>
+        </tr>
+        <tr>
+            <td>Position Type</td>
+            <td th:text="${job.positionType}"></td>
+        </tr>
+        <tr>
+            <td>Skill</td>
+            <td th:text="${job.coreCompetency}"></td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 
