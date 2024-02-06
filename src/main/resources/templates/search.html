@@ -1,43 +1,49 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
+
+<!--// head fragment includes meta tags, title, and link to stylesheets //-->
 <head th:replace="~{fragments :: head}">
 </head>
 <body>
 
-<div th:replace="~{fragments :: page-header}"></div>
+<!--// page header fragment includes navigation and other common header elements //-->
+<div th:replace="~{fragments :: page-header}">
+</div>
 
+<!--// main content container //-->
 <div class="container body-content">
 
-    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+    <!--// dynamically sets the page title w/ each word capitalized //-->
+    <h1 th:text="${#strings.capitalizeWords(title)}">
+    </h1>
 
-    <form th:action="@{/search/results}" method = "post">
+    <!--// search form to input search criteria //-->
+    <form th:action="@{/search/results}" method="post">
         <h2>Search by:</h2>
 
+        <!--// radio buttons for selecting the type of search //-->
         <p>
             <span th:each="column : ${columns}">
-                <input
-                        type="radio"
-                        name="searchType"
-                        th:id="${column.key}"
-                        th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                <input type="radio" name="searchType" th:id="${column.key}" th:value="${column.key}" th:checked="${column.key == 'all'}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
-
         </p>
 
+        <!--// text input for entering the search keyword //-->
         <p>
             <label for="searchTerm">Keyword:</label>
             <input type="text" name="searchTerm" id="searchTerm" />
         </p>
 
+        <!--// submit button for the search form //-->
         <input type="submit" value="Search" />
     </form>
 
+    <!--// horizontal rule, visual separator //-->
     <hr />
 
-    <!-- TODO #4 - Loop over the search results to display all job fields. -->
-
+    <!--// displays search results in a table format //-->
+    <!--// loops to display each job's details //-->
     <table class="job-listing" th:each="job : ${jobs}">
         <tbody>
         <tr>

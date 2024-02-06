@@ -1,38 +1,57 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
+
+<!--// head fragment includes meta tags, title, and link*** to stylesheets //-->
 <head th:replace="~{fragments :: head}">
 </head>
 <body>
 
-<div th:replace="~{fragments :: page-header}"></div>
+<!--// page header fragment includes navigation and other common header elements //-->
+<div th:replace="~{fragments :: page-header}">
+</div>
 
+<!--// main content container //-->
 <div class="container body-content">
 
-  <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+  <!--// dynamically sets the page title w/ each word capitalized //-->
+  <h1 th:text="${#strings.capitalizeWords(title)}">
+  </h1>
 
-  <!-- TODO #1 - Use a loop to display job results in a table. -->
-
+  <!--// displays each job in its own table. The "jobs" object is passed from the controller //-->
+  <!--// creates new table for each "job" in the "jobs" list //-->
   <table class="job-listing" th:each="job : ${jobs}">
+
+    <!--// displays job ID //-->
     <tr>
       <td>ID</td>
       <td th:text="${job.id}"></td>
     </tr>
+
+    <!--// displays job name //-->
     <tr>
       <td>Name</td>
       <td th:text="${job.name}"></td>
     </tr>
+
+    <!--// displays employer //-->
     <tr>
       <td>Employer</td>
       <td th:text="${job.employer}"></td>
     </tr>
+
+    <!--// displays location //-->
     <tr>
       <td>Location</td>
       <td th:text="${job.location}"></td>
     </tr>
+
+    <!--// displays position type //-->
     <tr>
       <td>Position Type</td>
       <td th:text="${job.positionType}"></td>
     </tr>
+
+    <!--// displays skill/core competency //-->
     <tr>
       <td>Skill</td>
       <td th:text="${job.coreCompetency}"></td>

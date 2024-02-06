@@ -1,30 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="~{fragments :: head}"></head>
 
+<!--// head fragment includes meta tags, title, and link to stylesheets //-->
+<head th:replace="~{fragments :: head}">
+</head>
 <body>
 
-<div th:replace="~{fragments :: page-header}"></div>
-
-<div class="container body-content">
-  <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
-  <h2 class = "centered">View Jobs By Category</h2>
+<!--// page header fragment includes navigation and other common header elements //-->
+<div th:replace="~{fragments :: page-header}">
 </div>
 
+<!--// main content container //-->
+<div class="container body-content">
+
+  <!--// dynamically sets the page title w/ each word capitalized //-->
+  <h1 th:text="${#strings.capitalizeWords(title)}">
+  </h1>
+
+  <!--// subtitle for the jobs category view //-->
+  <h2 class="centered">View Jobs By Category</h2>
+</div>
+
+<!--// table to display job categories and links //-->
 <table class="centeredTable">
   <tr>
+    <!--// loops through each column in "columns" to create table headers //-->
     <th:block th:each="column : ${columns}">
-      <th th:text = "${column.value}"></th>
+
+      <!--// displays each column's value as a table header //-->
+      <th th:text="${column.value}"></th>
     </th:block>
   </tr>
+
+  <!--// table row for category data //-->
   <tr>
-    <!-- TODO #2: Complete the View Jobs By Category Table. -->
 
-    <td><a href="/list/jobs?column=all">View All</a></td> <!-- Feel free to remove or modify this element if necessary. -->
+    <!--// direct link to view all jobs //-->
+    <td><a href="/list/jobs?column=all">View All</a></td>
 
+    <!--// loops through each category in "tableChoices" to create links //-->
     <td th:each="category : ${tableChoices}">
       <ul>
+        <!--// loops through each item in a category to generate a list item //-->
         <li th:each="item : ${category.value}">
+
+          <!--// creates a link for each job item with dynamic URL parameters //-->
           <a th:href="@{/list/jobs(column=${category.key},value=${item})}" th:text="${item}"></a>
         </li>
       </ul>
