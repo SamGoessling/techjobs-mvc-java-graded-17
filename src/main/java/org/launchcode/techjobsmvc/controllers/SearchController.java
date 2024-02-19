@@ -1,6 +1,5 @@
 package org.launchcode.techjobsmvc.controllers;
 
-//-- necessary imports --//
 import org.launchcode.techjobsmvc.models.Job;
 import org.launchcode.techjobsmvc.models.JobData;
 import org.springframework.stereotype.Controller;
